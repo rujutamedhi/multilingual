@@ -13,8 +13,16 @@ def item(request):
 def translate(language):
     cur_language = get_language()
     try:
+        # Activate the new language
         activate(language)
-        text = gettext('hello')
+        
+        # Get translations for both 'hello' and 'good'
+        hello_trans = gettext('hello')
+        good_trans = gettext('Good')
+        
     finally:
+        # Reset to the original language
         activate(cur_language)
-    return text
+    
+    # Return both translations as a dictionary
+    return {'hello': hello_trans, 'Good': good_trans}
